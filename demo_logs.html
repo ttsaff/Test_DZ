@@ -1,0 +1,190 @@
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png">
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico">
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111">
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
+
+
+  <title>CodePen - logging devtools</title>
+
+    <link rel="canonical" href="https://codepen.io/ronjonk/pen/YmrvPa">
+  
+  
+  
+  
+<style>
+a {
+  color: #317efb;
+  font-weight: bold;
+}
+
+body {
+  font-family: "Benton Sans", "Helvetica Neue", helvetica, arial, sans-serif;
+  margin: 0.1em;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 1em 0 1em;
+}
+
+button {
+  padding: 0.5em 1em 0.5em 1em;
+  color: white;
+  background-color: #317efb;
+  border-radius: 3px;
+  font-weight: bold;
+}
+
+button:disabled {
+  background-color: grey;
+}
+
+code {
+  font-size: 1.2em;
+  background-color: lightgrey;
+}
+
+ul li {
+  list-style-type: disc;
+}
+
+.title--image {
+  vertical-align: sub;
+  height: 1em;
+}
+
+.title--link {
+  text-decoration: none;
+}
+
+#demo {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+}
+button {
+  margin: 0.5em;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+<script src="chrome-extension://mooikfkahbdckldjjndioackbalphokd/assets/prompt.js"></script><style></style></head>
+
+<body translate="no">
+  <h1>
+      <a href="https://devtools.glitch.me" class="title--link">
+        <img src="https://raw.githubusercontent.com/ChromeDevTools/devtools-logo/master/96.png" alt="The Chrome DevTools logo." class="title--image">
+      </a>
+      Get Started With Logging Messages
+    </h1>
+    <p>
+      This is the companion demo for the <a href="https://devtools.chrome.com/console/log">Get Started
+      With Logging Messages</a> tutorial. Don't click any of the buttons until the tutorial instructs you
+      to do so.
+    </p>
+    <div id="demo">
+      <button id="hello">Log Info</button>
+      <button id="dante">Log Warning</button>
+      <button id="hal">Log Error</button>
+      <button id="table">Log Table</button>
+      <button id="group">Log Group</button>
+      <button id="custom">Log Custom</button>
+      <button id="network">Cause 404</button>
+      <button id="error">Cause Error</button>
+      <button id="violation">Cause Violation</button>
+    </div>
+  
+      <script id="rendered-js">
+document.querySelector('#hello').addEventListener('click', () => {
+  console.log('Hello, Console!');
+});
+
+document.querySelector('#dante').addEventListener('click', logWarning);
+
+function logWarning() {
+  quoteDante();
+}
+
+function quoteDante() {
+  console.warn('Abandon Hope All Ye Who Enter');
+}
+
+document.querySelector('#hal').addEventListener('click', () => {
+  console.error(`I'm sorry, Dave. I'm afraid I can't do that.`);
+});
+
+document.querySelector('#table').addEventListener('click', () => {
+  console.table([
+  {
+    first: 'René',
+    last: 'Magritte' },
+
+  {
+    first: 'Chaim',
+    last: 'Soutine',
+    birthday: '18930113' },
+
+  {
+    first: 'Henri',
+    last: 'Matisse' }]);
+
+
+});
+
+document.querySelector('#group').addEventListener('click', () => {
+  const label = 'Adolescent Irradiated Espionage Tortoises';
+  console.group(label);
+  console.info('Leo');
+  console.info('Mike');
+  console.info('Don');
+  console.info('Raph');
+  console.groupEnd(label);
+});
+
+document.querySelector('#custom').addEventListener('click', () => {
+  const spacing = '5px';
+  const styles =
+  `padding: ${spacing}; background-color: darkblue; color: white; font-style: 
+         italic; border: ${spacing} solid crimson; font-size: 2em;`;
+  console.log('%cVariety is the spice of life', styles);
+});
+
+document.querySelector('#error').addEventListener('click', () => {
+  document.querySelector('#date').textContent = new Date();
+});
+
+document.querySelector('#violation').addEventListener('click', e => {
+  const duration = 3000;
+  const start = new Date().getTime();
+  while (new Date().getTime() < start + duration) {
+    // Block the main thread for 3 seconds.
+    if (window.CP.shouldStopExecution(0)) break;}window.CP.exitedLoop(0);
+});
+
+document.querySelector('#network').addEventListener('click', e => {
+  fetch('/coffee');
+});
+//# sourceURL=pen.js
+    </script>
+
+  
+
+
+
+</body></html>
